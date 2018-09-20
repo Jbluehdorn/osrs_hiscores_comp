@@ -1,0 +1,26 @@
+{
+  "name": "osrs_hiscores_comp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "express": "^4.16.3",
+    "laravel-mix": "^2.1.14",
+    "path": "^0.12.7",
+    "pug": "^2.0.3",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1",
+    "bootstrap": "^4.1.3"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
