@@ -1,15 +1,14 @@
-<template>
-    <div id="app">
-        <router-view></router-view>
-    </div>
+<template lang="pug">
+    #app
+        .container-fluid
+            navbar
+            router-view.pt-1
 </template>
 
 <script>
-export default {
-    data() {
-        return {
+import navbar from './components/nav'
 
-        }
-    }
+export default {
+    components: {navbar}
 }
 </script>

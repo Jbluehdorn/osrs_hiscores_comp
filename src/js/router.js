@@ -4,8 +4,9 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 export default new VueRouter({
+    linkExactActiveClass: 'active',
     routes: [{
         path: '/',
-        component: require('./components/index.vue')
+        component: require('./components/scores.vue')
     }]
 })

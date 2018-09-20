@@ -1,7 +1,9 @@
 import Vue from 'vue'
+import VueResource from 'vue-resource'
+
 import router from './router'
 
-console.log('anything')
+Vue.use(VueResource)
 
 const vm = new Vue({
     router,
