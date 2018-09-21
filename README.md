@@ -10,3 +10,5 @@ npm i
 npm run dev
 node server.js
 ```
+
+The site can then be accessed at `localhost:8000`. Port can be changed in `server.js`.
