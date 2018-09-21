@@ -19,13 +19,31 @@
                     button(
                         type="button"
                         @click="search"
+                        :disabled="loading"
                     ).btn.btn-success
-                        | Search
+                        span(v-show="!loading") Search
+                        i.fa.fa-spin.fa-spinner(v-show="loading")
 
             .card-body
-                .text-sm-center(v-show="loading")
-                    i.fa.fa-lg.fa-spinner.fa-spin
-                div(v-show="!loading" v-if="user")
+                .table-responsive
+                    table.table.table-sm
+                        thead
+                            tr
+                                th
+                                th Skill
+                                th Exp
+                                th Rank
+                                th Difference
+                        tbody
+                            tr(v-for="(skill, name) in user" :key="skill.img")
+                                td
+                                    img(:src="`api/images/${skill.img}`")
+                                    span &nbsp;{{name}}
+                                td
+                                td
+                                td
+                                td
+
 </template>
 
 <style lang="scss" scoped>
@@ -51,8 +69,8 @@ export default {
                 'hcim',
                 'uim'
             ],
-            user: null,
-            loading: true
+            user: {},
+            loading: false
         }
     },
     mounted() {
@@ -61,6 +79,9 @@ export default {
     methods: {
         async search() {
             this.loading = true
+
+            let resp = await this.$http.get(`/api/user/normal/${this.username}`)
+            this.user = await resp.json()
 
             this.loading = false
         }

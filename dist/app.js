@@ -16284,6 +16284,24 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -16293,8 +16311,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             username: null,
             user_type: null,
             types: ['norm', 'im', 'hcim', 'uim'],
-            user: null,
-            loading: true
+            user: {},
+            loading: false
         };
     },
     mounted: function mounted() {
@@ -16304,15 +16322,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     methods: {
         search: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var resp;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 this.loading = true;
 
+                                _context.next = 3;
+                                return this.$http.get('/api/user/normal/' + this.username);
+
+                            case 3:
+                                resp = _context.sent;
+                                _context.next = 6;
+                                return resp.json();
+
+                            case 6:
+                                this.user = _context.sent;
+
+
                                 this.loading = false;
 
-                            case 2:
+                            case 8:
                             case 'end':
                                 return _context.stop();
                         }
@@ -16690,46 +16721,80 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-success",
-              attrs: { type: "button" },
+              attrs: { type: "button", disabled: _vm.loading },
               on: { click: _vm.search }
             },
-            [_vm._v("Search")]
+            [
+              _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.loading,
+                      expression: "!loading"
+                    }
+                  ]
+                },
+                [_vm._v("Search")]
+              ),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loading,
+                    expression: "loading"
+                  }
+                ],
+                staticClass: "fa fa-spin fa-spinner"
+              })
+            ]
           )
         ])
       ]),
       _c("div", { staticClass: "card-body" }, [
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.loading,
-                expression: "loading"
-              }
-            ],
-            staticClass: "text-sm-center"
-          },
-          [_c("i", { staticClass: "fa fa-lg fa-spinner fa-spin" })]
-        ),
-        _vm.user
-          ? _c("div", {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: !_vm.loading,
-                  expression: "!loading"
-                }
-              ]
-            })
-          : _vm._e()
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table table-sm" }, [
+            _vm._m(0),
+            _c(
+              "tbody",
+              _vm._l(_vm.user, function(skill, name) {
+                return _c("tr", { key: skill.img }, [
+                  _c("td", [
+                    _c("img", { attrs: { src: "api/images/" + skill.img } }),
+                    _c("span", [_vm._v(" " + _vm._s(name))])
+                  ]),
+                  _c("td"),
+                  _c("td"),
+                  _c("td"),
+                  _c("td")
+                ])
+              })
+            )
+          ])
+        ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th"),
+        _c("th", [_vm._v("Skill")]),
+        _c("th", [_vm._v("Exp")]),
+        _c("th", [_vm._v("Rank")]),
+        _c("th", [_vm._v("Difference")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
