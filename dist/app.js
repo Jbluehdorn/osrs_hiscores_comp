@@ -17222,6 +17222,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17280,6 +17289,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return search;
         }(),
         checkRankDiff: function checkRankDiff(skill) {
+            if (this.overall.rank == '-1') return skill.rank > 0 ? parseInt(skill.rank) : 0;
+
             return parseInt(this.overall.rank) - parseInt(skill.rank);
         }
     },
@@ -19157,13 +19168,77 @@ var render = function() {
                     _c("tr", [
                       _vm._m(1),
                       _c("td", { staticClass: "text-sm-right" }, [
-                        _vm._v(_vm._s(_vm.overall.level))
+                        _vm._v(
+                          _vm._s(
+                            _vm.overall.level != 0
+                              ? _vm.overall.level
+                              : "Not Ranked"
+                          )
+                        )
                       ]),
                       _c("td", { staticClass: "text-sm-right" }, [
-                        _vm._v(_vm._s(_vm._f("number")(_vm.overall.experience)))
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.overall.level == 0,
+                                expression: "overall.level == 0"
+                              }
+                            ]
+                          },
+                          [_vm._v("Not Ranked")]
+                        ),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.overall.level != 0,
+                                expression: "overall.level != 0"
+                              }
+                            ]
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm._f("number")(_vm.overall.experience))
+                            )
+                          ]
+                        )
                       ]),
                       _c("td", { staticClass: "text-sm-right" }, [
-                        _vm._v(_vm._s(_vm._f("number")(_vm.overall.rank)))
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.overall.level == 0,
+                                expression: "overall.level == 0"
+                              }
+                            ]
+                          },
+                          [_vm._v("Not Ranked")]
+                        ),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.overall.level != 0,
+                                expression: "overall.level != 0"
+                              }
+                            ]
+                          },
+                          [_vm._v(_vm._s(_vm._f("number")(_vm.overall.rank)))]
+                        )
                       ]),
                       _c("td", { staticClass: "text-sm-right" }, [_vm._v("-")])
                     ]),
@@ -19191,36 +19266,156 @@ var render = function() {
                               )
                             ]),
                             _c("td", { staticClass: "text-sm-right" }, [
-                              _vm._v(_vm._s(skill.level))
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: skill.rank == -1,
+                                      expression: "skill.rank == -1"
+                                    }
+                                  ]
+                                },
+                                [_vm._v("Not Ranked")]
+                              ),
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: skill.rank != -1,
+                                      expression: "skill.rank != -1"
+                                    }
+                                  ]
+                                },
+                                [_vm._v(_vm._s(skill.level))]
+                              )
                             ]),
                             _c("td", { staticClass: "text-sm-right" }, [
-                              _vm._v(_vm._s(_vm._f("number")(skill.experience)))
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: skill.rank == -1,
+                                      expression: "skill.rank == -1"
+                                    }
+                                  ]
+                                },
+                                [_vm._v("Not Ranked")]
+                              ),
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: skill.rank != -1,
+                                      expression: "skill.rank != -1"
+                                    }
+                                  ]
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm._f("number")(skill.experience))
+                                  )
+                                ]
+                              )
                             ]),
                             _c("td", { staticClass: "text-sm-right" }, [
-                              _vm._v(_vm._s(_vm._f("number")(skill.rank)))
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: skill.rank == -1,
+                                      expression: "skill.rank == -1"
+                                    }
+                                  ]
+                                },
+                                [_vm._v("Not Ranked")]
+                              ),
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: skill.rank != -1,
+                                      expression: "skill.rank != -1"
+                                    }
+                                  ]
+                                },
+                                [_vm._v(_vm._s(_vm._f("number")(skill.rank)))]
+                              )
                             ]),
                             _c(
                               "td",
                               {
                                 staticClass: "text-sm-right",
-                                class:
-                                  _vm.checkRankDiff(skill) >= 0
-                                    ? "text-success"
-                                    : "text-danger"
+                                class: {
+                                  "text-success":
+                                    _vm.checkRankDiff(skill) >= 0 &&
+                                    skill.rank != -1,
+                                  "text-danger":
+                                    _vm.checkRankDiff(skill) < 0 &&
+                                    skill.rank != -1
+                                }
                               },
                               [
-                                _c("i", {
-                                  staticClass: "fa",
-                                  class:
-                                    _vm.checkRankDiff(skill) >= 0
-                                      ? "fa-chevron-up"
-                                      : "fa-chevron-down"
-                                }),
-                                _vm._v(
-                                  " " +
-                                    _vm._s(
-                                      _vm._f("number")(_vm.checkRankDiff(skill))
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: skill.rank == -1,
+                                        expression: "skill.rank == -1"
+                                      }
+                                    ]
+                                  },
+                                  [_vm._v("-")]
+                                ),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: skill.rank != -1,
+                                        expression: "skill.rank != -1"
+                                      }
+                                    ]
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa",
+                                      class:
+                                        _vm.checkRankDiff(skill) >= 0
+                                          ? "fa-chevron-up"
+                                          : "fa-chevron-down"
+                                    }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(
+                                          _vm._f("number")(
+                                            _vm.checkRankDiff(skill)
+                                          )
+                                        )
                                     )
+                                  ]
                                 )
                               ]
                             )

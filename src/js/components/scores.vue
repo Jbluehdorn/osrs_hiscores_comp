@@ -49,11 +49,13 @@
                                             .col-sm-11
                                                 | Overall
                                 td.text-sm-right
-                                    | {{overall.level}}
+                                    | {{overall.level != 0 ? overall.level : 'Not Ranked'}}
                                 td.text-sm-right
-                                    | {{overall.experience | number}}
+                                    span(v-show="overall.level == 0") Not Ranked
+                                    span(v-show="overall.level != 0") {{overall.experience | number}}
                                 td.text-sm-right
-                                    | {{overall.rank | number}}
+                                    span(v-show="overall.level == 0") Not Ranked
+                                    span(v-show="overall.level != 0") {{overall.rank | number}}
                                 td.text-sm-right
                                     | -
                                 
@@ -65,14 +67,21 @@
                                                 img(:src="`api/images/${skill.img}`")
                                             .col-sm-11 {{name | capitalize}}
                                 td.text-sm-right
-                                    | {{skill.level}}
+                                    span(v-show="skill.rank == -1") Not Ranked
+                                    span(v-show="skill.rank != -1") {{skill.level}}
                                 td.text-sm-right
-                                    | {{skill.experience | number}}
+                                    span(v-show="skill.rank == -1") Not Ranked
+                                    span(v-show="skill.rank != -1") {{skill.experience | number}}
                                 td.text-sm-right
-                                    | {{skill.rank | number}}
-                                td(:class="checkRankDiff(skill) >= 0 ? 'text-success' : 'text-danger'").text-sm-right
-                                    i(:class="checkRankDiff(skill) >= 0 ? 'fa-chevron-up' : 'fa-chevron-down'").fa
-                                    | &nbsp;{{checkRankDiff(skill) | number}}
+                                    span(v-show="skill.rank == -1") Not Ranked
+                                    span(v-show="skill.rank != -1") {{skill.rank | number}}
+                                td(
+                                    :class="{'text-success': checkRankDiff(skill) >= 0 && skill.rank != -1, 'text-danger': checkRankDiff(skill) < 0 && skill.rank != -1}"
+                                ).text-sm-right
+                                    span(v-show="skill.rank == -1") -
+                                    span(v-show="skill.rank != -1")
+                                        i(:class="checkRankDiff(skill) >= 0 ? 'fa-chevron-up' : 'fa-chevron-down'").fa
+                                        | &nbsp;{{checkRankDiff(skill) | number}}
 
 </template>
 
@@ -118,6 +127,9 @@ export default {
             this.loading = false
         },
         checkRankDiff(skill) {
+            if(this.overall.rank == '-1')
+                return skill.rank > 0 ? parseInt(skill.rank) : 0
+
             return parseInt(this.overall.rank) - parseInt(skill.rank)
         }
     },
