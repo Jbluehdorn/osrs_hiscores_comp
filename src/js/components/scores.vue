@@ -2,9 +2,14 @@
     .container-fluid
         .card
             .card-header
-                form.form-inline
+                .form-inline
                     .form-group
-                        input(type="text" v-model="username" placeholder="Username").form-control
+                        input(
+                            type="text" 
+                            v-model="username" 
+                            placeholder="Username"
+                            @keyup.enter="search"
+                        ).form-control
                         
                     .btn-group.mx-1
                         button(
@@ -25,24 +30,49 @@
                         i.fa.fa-spin.fa-spinner(v-show="loading")
 
             .card-body
-                .table-responsive
+                .table-responsive(v-if="user")
                     table.table.table-sm
                         thead
                             tr
-                                th
                                 th Skill
-                                th Exp
-                                th Rank
-                                th Difference
+                                th.text-sm-right Level
+                                th.text-sm-right Exp
+                                th.text-sm-right Rank
+                                th.text-sm-right Difference
                         tbody
-                            tr(v-for="(skill, name) in user" :key="skill.img")
+                            tr
+                                td 
+                                    .container-fluid.px-0
+                                        .row
+                                            .col-sm-1
+                                                img(src="api/images/norm.png")
+                                            .col-sm-11
+                                                | Overall
+                                td.text-sm-right
+                                    | {{overall.level}}
+                                td.text-sm-right
+                                    | {{overall.experience | number}}
+                                td.text-sm-right
+                                    | {{overall.rank | number}}
+                                td.text-sm-right
+                                    | -
+                                
+                            tr(v-for="(skill, name) in user" :key="skill.img" v-if="skill.img")
                                 td
-                                    img(:src="`api/images/${skill.img}`")
-                                    span &nbsp;{{name}}
-                                td
-                                td
-                                td
-                                td
+                                    .container-fluid.px-0
+                                        .row
+                                            .col-sm-1
+                                                img(:src="`api/images/${skill.img}`")
+                                            .col-sm-11 {{name | capitalize}}
+                                td.text-sm-right
+                                    | {{skill.level}}
+                                td.text-sm-right
+                                    | {{skill.experience | number}}
+                                td.text-sm-right
+                                    | {{skill.rank | number}}
+                                td(:class="checkRankDiff(skill) >= 0 ? 'text-success' : 'text-danger'").text-sm-right
+                                    i(:class="checkRankDiff(skill) >= 0 ? 'fa-chevron-up' : 'fa-chevron-down'").fa
+                                    | &nbsp;{{checkRankDiff(skill) | number}}
 
 </template>
 
@@ -69,8 +99,9 @@ export default {
                 'hcim',
                 'uim'
             ],
-            user: {},
-            loading: false
+            user: null,
+            loading: false,
+            overall: null
         }
     },
     mounted() {
@@ -82,8 +113,20 @@ export default {
 
             let resp = await this.$http.get(`/api/user/normal/${this.username}`)
             this.user = await resp.json()
+            this.overall = this.user.overall
 
             this.loading = false
+        },
+        checkRankDiff(skill) {
+            return parseInt(this.overall.rank) - parseInt(skill.rank)
+        }
+    },
+    filters: {
+        capitalize(val) {
+            return val.charAt(0).toUpperCase() + val.slice(1)
+        },
+        number(val) {
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     }
 }
