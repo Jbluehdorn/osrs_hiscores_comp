@@ -31,7 +31,7 @@
 
             .card-body
                 .table-responsive(v-if="user")
-                    table.table.table-sm
+                    table.table.table-sm.table-striped
                         thead
                             tr
                                 th Skill
@@ -91,6 +91,10 @@
         outline: none;
         box-shadow: none;
     }
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #333;
 }
 </style>
 

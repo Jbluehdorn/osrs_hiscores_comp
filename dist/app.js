@@ -16773,7 +16773,7 @@ exports = module.exports = __webpack_require__(24)(false);
 
 
 // module
-exports.push([module.i, "\n.btn-group .btn[data-v-0e4fe34d]:focus {\n  outline: none;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n", ""]);
+exports.push([module.i, "\n.btn-group .btn[data-v-0e4fe34d]:focus {\n  outline: none;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.table-striped tbody tr[data-v-0e4fe34d]:nth-of-type(odd) {\n  background-color: #333;\n}\n", ""]);
 
 // exports
 
@@ -17135,6 +17135,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -19160,7 +19164,7 @@ var render = function() {
       _c("div", { staticClass: "card-body" }, [
         _vm.user
           ? _c("div", { staticClass: "table-responsive" }, [
-              _c("table", { staticClass: "table table-sm" }, [
+              _c("table", { staticClass: "table table-sm table-striped" }, [
                 _vm._m(0),
                 _c(
                   "tbody",
