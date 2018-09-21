@@ -19170,7 +19170,22 @@ var render = function() {
                   "tbody",
                   [
                     _c("tr", [
-                      _vm._m(1),
+                      _c("td", [
+                        _c("div", { staticClass: "container-fluid px-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-sm-1" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: "api/images/" + _vm.user_type + ".png"
+                                }
+                              })
+                            ]),
+                            _c("div", { staticClass: "col-sm-11" }, [
+                              _vm._v("Overall")
+                            ])
+                          ])
+                        ])
+                      ]),
                       _c("td", { staticClass: "text-sm-right" }, [
                         _vm._v(
                           _vm._s(
@@ -19448,21 +19463,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-sm-right" }, [_vm._v("Exp")]),
         _c("th", { staticClass: "text-sm-right" }, [_vm._v("Rank")]),
         _c("th", { staticClass: "text-sm-right" }, [_vm._v("Difference")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "container-fluid px-0" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-1" }, [
-            _c("img", { attrs: { src: "api/images/norm.png" } })
-          ]),
-          _c("div", { staticClass: "col-sm-11" }, [_vm._v("Overall")])
-        ])
       ])
     ])
   }

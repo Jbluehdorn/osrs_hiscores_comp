@@ -45,7 +45,7 @@
                                     .container-fluid.px-0
                                         .row
                                             .col-sm-1
-                                                img(src="api/images/norm.png")
+                                                img(:src="`api/images/${user_type}.png`")
                                             .col-sm-11
                                                 | Overall
                                 td.text-sm-right
