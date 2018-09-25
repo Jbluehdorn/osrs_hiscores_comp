@@ -13,7 +13,28 @@ app.get('/api/images/:name', (req, res) => {
 })
 
 app.get('/api/user/:type/:name', async (req, res) => {
-    let user = await hiscores.getPlayer({name: req.params.name, type: constants.playerTypes.normal})
+    let type;
+
+    switch(req.params.type) {
+        case 'norm':
+            type = constants.playerTypes.normal
+            break
+        case 'im':
+            type = constants.playerTypes.ironman
+            break
+        case 'hcim':
+            type = constants.playerTypes.hardcoreIronman
+            break
+        case 'uim':
+            type = constants.playerTypes.ultimateIronman
+            break
+        default:
+            type = constants.playerTypes.normal
+            console.error('Type not recognized')
+            break
+    }
+
+    let user = await hiscores.getPlayer({name: req.params.name, type: type})
 
     mapper.map(user)
 

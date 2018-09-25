@@ -17264,7 +17264,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 this.loading = true;
 
                                 _context.next = 3;
-                                return this.$http.get('/api/user/normal/' + this.username);
+                                return this.$http.get('/api/user/' + this.user_type + '/' + this.username);
 
                             case 3:
                                 resp = _context.sent;

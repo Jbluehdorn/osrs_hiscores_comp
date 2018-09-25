@@ -124,7 +124,7 @@ export default {
         async search() {
             this.loading = true
 
-            let resp = await this.$http.get(`/api/user/normal/${this.username}`)
+            let resp = await this.$http.get(`/api/user/${this.user_type}/${this.username}`)
             this.user = await resp.json()
             this.overall = this.user.overall
 
