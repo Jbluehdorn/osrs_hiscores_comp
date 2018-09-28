@@ -40,6 +40,10 @@
                         i.fa.fa-spin.fa-spinner(v-show="loading")
 
             .card-body
+                .alert.alert-danger(v-if="error")
+                    strong ERR:
+                    | &nbsp;{{error}}
+
                 .table-responsive(v-if="user")
                     table.table.table-sm.table-striped
                         thead
@@ -124,7 +128,8 @@ export default {
             ],
             user: null,
             loading: false,
-            overall: null
+            overall: null,
+            error: null
         }
     },
     mounted() {
@@ -138,8 +143,10 @@ export default {
                 let resp = await this.$http.get(`/api/user/${this.user_type}/${this.username}`)
                 this.user = await resp.json()
                 this.overall = this.user.overall
+                this.error = null
             } catch(ex) {
-                console.log(ex)
+                this.error = ex.statusText
+                this.user = null
             }
 
             this.loading = false

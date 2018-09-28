@@ -34111,6 +34111,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -34122,7 +34126,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             types: ['norm', 'im', 'hcim', 'uim'],
             user: null,
             loading: false,
-            overall: null
+            overall: null,
+            error: null
         };
     },
     mounted: function mounted() {
@@ -34152,25 +34157,27 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 this.user = _context.sent;
 
                                 this.overall = this.user.overall;
-                                _context.next = 14;
+                                this.error = null;
+                                _context.next = 16;
                                 break;
 
-                            case 11:
-                                _context.prev = 11;
+                            case 12:
+                                _context.prev = 12;
                                 _context.t0 = _context['catch'](1);
 
-                                console.log(_context.t0);
+                                this.error = _context.t0.statusText;
+                                this.user = null;
 
-                            case 14:
+                            case 16:
 
                                 this.loading = false;
 
-                            case 15:
+                            case 17:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[1, 11]]);
+                }, _callee, this, [[1, 12]]);
             }));
 
             function search() {
@@ -36055,6 +36062,12 @@ var render = function() {
         ])
       ]),
       _c("div", { staticClass: "card-body" }, [
+        _vm.error
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _c("strong", [_vm._v("ERR:")]),
+              _vm._v(" " + _vm._s(_vm.error))
+            ])
+          : _vm._e(),
         _vm.user
           ? _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-sm table-striped" }, [
