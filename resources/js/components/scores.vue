@@ -134,9 +134,13 @@ export default {
         async search() {
             this.loading = true
 
-            let resp = await this.$http.get(`/api/user/${this.user_type}/${this.username}`)
-            this.user = await resp.json()
-            this.overall = this.user.overall
+            try {
+                let resp = await this.$http.get(`/api/user/${this.user_type}/${this.username}`)
+                this.user = await resp.json()
+                this.overall = this.user.overall
+            } catch(ex) {
+                console.log(ex)
+            }
 
             this.loading = false
         },
@@ -157,7 +161,7 @@ export default {
     },
     watch: {
         'user_type': function(val) {
-            if(this.username)
+            if(this.username && this.user)
                 this.search()
         }
     }

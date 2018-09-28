@@ -13,7 +13,7 @@ app.get('/api/images/:name', (req, res) => {
 })
 
 app.get('/api/user/:type/:name', async (req, res) => {
-    let type;
+    let type, user;
 
     switch(req.params.type) {
         case 'norm':
@@ -30,15 +30,23 @@ app.get('/api/user/:type/:name', async (req, res) => {
             break
         default:
             type = constants.playerTypes.normal
-            console.error('Type not recognized')
+            console.error(`Type "${req.params.type}" was not recognized`)
             break
     }
 
-    let user = await hiscores.getPlayer({name: req.params.name, type: type})
+    try {
+        user = await hiscores.getPlayer({name: req.params.name, type: type})
+    } catch(ex) {
+        console.log(`${req.params.name} ${req.params.name} was not found`)
+        res.setHeader('Content-Type', 'application/json')
+        res.statusMessage = `${req.params.name} was not found`
+        res.status(404).send()
+        return
+    }
 
     mapper.map(user)
 
-    res.setHeader('Cotnent-Type', 'application/json')
+    res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify(user))
 })
 
