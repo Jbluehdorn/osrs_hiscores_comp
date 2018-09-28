@@ -17239,6 +17239,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17308,6 +17318,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         },
         number: function number(val) {
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    },
+    watch: {
+        'user_type': function user_type(val) {
+            if (this.username) this.search();
         }
     }
 });
@@ -19072,6 +19087,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
+    _vm._m(0),
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-header" }, [
         _c("div", { staticClass: "form-inline" }, [
@@ -19169,9 +19185,19 @@ var render = function() {
         _vm.user
           ? _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-sm table-striped" }, [
-                _vm._m(0),
+                _vm._m(1),
                 _c(
                   "tbody",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.loading,
+                        expression: "!loading"
+                      }
+                    ]
+                  },
                   [
                     _c("tr", [
                       _c("td", [
@@ -19267,7 +19293,7 @@ var render = function() {
                     ]),
                     _vm._l(_vm.user, function(skill, name) {
                       return skill.img
-                        ? _c("tr", { key: skill.img }, [
+                        ? _c("tr", { key: name }, [
                             _c("td", [
                               _c(
                                 "div",
@@ -19456,6 +19482,35 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card mb-1" }, [
+      _c(
+        "div",
+        {
+          staticClass: "card-header clickable",
+          attrs: { "data-toggle": "collapse", "data-target": "#info" }
+        },
+        [
+          _vm._v("What is this?"),
+          _c("span", { staticClass: "pull-right" }, [
+            _c("i", { staticClass: "fa fa-chevron-down" })
+          ])
+        ]
+      ),
+      _c("div", { staticClass: "collapse", attrs: { id: "info" } }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("p", { staticClass: "mb-0" }, [
+            _vm._v(
+              "This tool is intended to show you a comparison of your skill ranks and your overall rank. Differential shows how much higher or lower your skill rank is than your overall rank."
+            )
+          ])
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

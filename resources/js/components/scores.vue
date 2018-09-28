@@ -1,5 +1,15 @@
 <template lang="pug">
     .container-fluid
+        .card.mb-1
+            .card-header(data-toggle="collapse" data-target="#info").clickable
+                | What is this?
+                span.pull-right
+                    i.fa.fa-chevron-down
+            .collapse#info
+                .card-body
+                    p.mb-0
+                        | This tool is intended to show you a comparison of your skill ranks and your overall rank. Differential shows how much higher or lower your skill rank is than your overall rank.
+        
         .card
             .card-header
                 .form-inline
@@ -39,7 +49,7 @@
                                 th.text-sm-right Exp
                                 th.text-sm-right Rank
                                 th.text-sm-right Difference
-                        tbody
+                        tbody(v-show="!loading")
                             tr
                                 td 
                                     .container-fluid.px-0
@@ -59,7 +69,7 @@
                                 td.text-sm-right
                                     | -
                                 
-                            tr(v-for="(skill, name) in user" :key="skill.img" v-if="skill.img")
+                            tr(v-for="(skill, name) in user" :key="name" v-if="skill.img")
                                 td
                                     .container-fluid.px-0
                                         .row
@@ -143,6 +153,12 @@ export default {
         },
         number(val) {
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    },
+    watch: {
+        'user_type': function(val) {
+            if(this.username)
+                this.search()
         }
     }
 }

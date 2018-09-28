@@ -10643,3 +10643,7 @@ a.text-dark:focus {
   color: #fff;
 }
 
+.clickable:hover {
+  cursor: pointer;
+}
+
