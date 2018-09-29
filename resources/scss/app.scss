@@ -3,6 +3,8 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~bootswatch/dist/darkly/bootswatch';
 
+@import './components/switch.scss';
+
 .clickable:hover {
     cursor: pointer;
 }

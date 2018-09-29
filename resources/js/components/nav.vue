@@ -8,6 +8,9 @@
         .collapse.navbar-collapse#mainNav
             ul.navbar-nav.mr-auto
                 li.nav-item
-                    router-link(to="/").nav-link
+                    router-link(to="/hiscores").nav-link
                         | Scores
+                li.nav-item
+                    router-link(to="/slayer").nav-link
+                        | Slayer
 </template>

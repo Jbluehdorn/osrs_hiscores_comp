@@ -8,6 +8,9 @@ const mapper = require('./app/SkillMap')
 
 app.use(express.static('dist'))
 
+/**
+ * API ROUTES
+ */
 app.get('/api/images/:name', (req, res) => {
     res.sendFile(path.join(`${__dirname}/resources/images/${req.params.name}`))
 })
@@ -50,6 +53,14 @@ app.get('/api/user/:type/:name', async (req, res) => {
     res.send(JSON.stringify(user))
 })
 
+app.get('/api/slayer_masters', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+    res.send(JSON.stringify(require('./app/SlayerMasters.js')))
+})
+
+/**
+ * STATIC ROUTES
+ */
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/index.html'))
 })

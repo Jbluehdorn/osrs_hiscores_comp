@@ -6,7 +6,13 @@ Vue.use(VueRouter)
 export default new VueRouter({
     linkExactActiveClass: 'active',
     routes: [{
-        path: '/',
-        component: require('./components/scores.vue')
+        path: '/hiscores',
+        component: require('./components/Scores.vue')
+    }, {
+        path: '/slayer',
+        component: require('./components/Slayer.vue')
+    }, {
+        path: '*',
+        redirect: '/hiscores'
     }]
 })
