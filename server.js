@@ -2,9 +2,8 @@ const express = require('express')
 const app = express()
 const port = 8000
 
-const {constants, hiscores} = require('osrs-api')
 const path = require('path')
-const mapper = require('./app/SkillMap')
+const OSRSController = require('./app/Controllers/OSRSController')
 
 app.use(express.static('dist'))
 
@@ -16,41 +15,17 @@ app.get('/api/images/:name', (req, res) => {
 })
 
 app.get('/api/user/:type/:name', async (req, res) => {
-    let type, user;
-
-    switch(req.params.type) {
-        case 'norm':
-            type = constants.playerTypes.normal
-            break
-        case 'im':
-            type = constants.playerTypes.ironman
-            break
-        case 'hcim':
-            type = constants.playerTypes.hardcoreIronman
-            break
-        case 'uim':
-            type = constants.playerTypes.ultimateIronman
-            break
-        default:
-            type = constants.playerTypes.normal
-            console.error(`Type "${req.params.type}" was not recognized`)
-            break
-    }
+    res.setHeader('Content-Type', 'application/json')
 
     try {
-        user = await hiscores.getPlayer({name: req.params.name, type: type})
+        let user = await OSRSController.getUser(req.params.type, req.params.name)
+
+        res.send(JSON.stringify(user))
     } catch(ex) {
-        console.log(`${req.params.name} ${req.params.name} was not found`)
-        res.setHeader('Content-Type', 'application/json')
+        console.log(`${req.params.type} ${req.params.name} was not found`)
         res.statusMessage = `${req.params.name} was not found`
         res.status(404).send()
-        return
     }
-
-    mapper.map(user)
-
-    res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify(user))
 })
 
 app.get('/api/slayer_masters', (req, res) => {

@@ -12,6 +12,9 @@ export default new VueRouter({
         path: '/slayer',
         component: require('./components/Slayer.vue')
     }, {
+        path: '/ensouled_heads',
+        component: require('./components/EnsouledHeads.vue')
+    }, {
         path: '*',
         redirect: '/hiscores'
     }]

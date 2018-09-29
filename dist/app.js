@@ -30924,6 +30924,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         path: '/slayer',
         component: __webpack_require__(72)
     }, {
+        path: '/ensouled_heads',
+        component: __webpack_require__(77)
+    }, {
         path: '*',
         redirect: '/hiscores'
     }]
@@ -36632,6 +36635,18 @@ var render = function() {
                 )
               ],
               1
+            ),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav-link", attrs: { to: "/ensouled_heads" } },
+                  [_vm._v("Ensouled Heads")]
+                )
+              ],
+              1
             )
           ])
         ]
@@ -37170,6 +37185,143 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return streak - this.cur_streak;
         }
     }
+});
+
+/***/ }),
+/* 75 */,
+/* 76 */,
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(79)
+/* template */
+var __vue_template__ = __webpack_require__(78)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/EnsouledHeads.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-576da186", Component.options)
+  } else {
+    hotAPI.reload("data-v-576da186", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "card mb-1" }, [
+        _c(
+          "div",
+          {
+            staticClass: "card-header clickable",
+            attrs: { "data-toggle": "collapse", "data-target": "#info" }
+          },
+          [
+            _vm._v("What is this?"),
+            _c("span", { staticClass: "pull-right" }, [
+              _c("i", { staticClass: "fa fa-chevron-down" })
+            ])
+          ]
+        ),
+        _c("div", { staticClass: "collapse", attrs: { id: "info" } }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("p", { staticClass: "mb-0" }, [
+              _vm._v(
+                "This tool is a worksheet to help determine the amount of runes needed for Reanimating Ensouled Heads and how much experience will be accrued. "
+              )
+            ])
+          ])
+        ])
+      ]),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("Ensouled Head Worksheet")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-576da186", module.exports)
+  }
+}
+
+/***/ }),
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
+    mounted: function mounted() {}
 });
 
 /***/ })

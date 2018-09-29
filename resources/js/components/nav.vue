@@ -13,4 +13,7 @@
                 li.nav-item
                     router-link(to="/slayer").nav-link
                         | Slayer
+                li.nav-item
+                    router-link(to="/ensouled_heads").nav-link
+                        | Ensouled Heads
 </template>
