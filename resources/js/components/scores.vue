@@ -158,14 +158,6 @@ export default {
             return parseInt(this.overall.rank) - parseInt(skill.rank)
         }
     },
-    filters: {
-        capitalize(val) {
-            return val.charAt(0).toUpperCase() + val.slice(1)
-        },
-        number(val) {
-            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-    },
     watch: {
         'user_type': function(val) {
             if(this.username && this.user)

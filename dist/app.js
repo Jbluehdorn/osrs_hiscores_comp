@@ -12205,6 +12205,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_resource__["a" /* default */]);
 
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.filter('number', function (val) {
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+});
+
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.filter('capitalize', function (val) {
+    return val.charAt(0).toUpperCase() + val.slice(1);
+});
+
 var vm = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
     router: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */],
     render: function render(h) {
@@ -34208,14 +34216,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return parseInt(this.overall.rank) - parseInt(skill.rank);
         }
     },
-    filters: {
-        capitalize: function capitalize(val) {
-            return val.charAt(0).toUpperCase() + val.slice(1);
-        },
-        number: function number(val) {
-            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-    },
     watch: {
         'user_type': function user_type(val) {
             if (this.username && this.user) this.search();
@@ -36987,6 +36987,26 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37007,9 +37027,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            loading: false,
+            ensouled_heads: null
+        };
     },
-    mounted: function mounted() {}
+    mounted: function mounted() {
+        this.load();
+    },
+
+    methods: {
+        load: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var resp;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                this.loading = true;
+
+                                _context.next = 3;
+                                return this.$http.get('/api/ensouled_heads');
+
+                            case 3:
+                                resp = _context.sent;
+                                _context.next = 6;
+                                return resp.json();
+
+                            case 6:
+                                this.ensouled_heads = _context.sent;
+
+
+                                this.loading = false;
+
+                            case 8:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function load() {
+                return _ref.apply(this, arguments);
+            }
+
+            return load;
+        }()
+    }
 });
 
 /***/ }),
@@ -37020,43 +37085,83 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container-fluid" }, [
+    _vm._m(0),
+    _c("div", { staticClass: "card" }, [
+      _vm._m(1),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table table-striped table-sm" }, [
+            _c("thead"),
+            _c(
+              "tbody",
+              _vm._l(_vm.ensouled_heads, function(item) {
+                return _c("tr", { key: item.name }, [
+                  _c("td", [_vm._v(_vm._s(item.name))]),
+                  _c("td", { staticClass: "text-sm-right" }, [
+                    _vm._v(_vm._s(_vm._f("number")(item.exp)))
+                  ]),
+                  _c("td", { staticClass: "text-sm-right" }, [
+                    _vm._v(_vm._s(item.souls))
+                  ]),
+                  _c("td", { staticClass: "text-sm-right" }, [
+                    _vm._v(_vm._s(item.bodies))
+                  ]),
+                  _c("td", { staticClass: "text-sm-right" }, [
+                    _vm._v(_vm._s(item.nats))
+                  ]),
+                  _c("td", { staticClass: "text-sm-right" }, [
+                    _vm._v(_vm._s(item.bloods))
+                  ])
+                ])
+              })
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-fluid" }, [
-      _c("div", { staticClass: "card mb-1" }, [
-        _c(
-          "div",
-          {
-            staticClass: "card-header clickable",
-            attrs: { "data-toggle": "collapse", "data-target": "#info" }
-          },
-          [
-            _vm._v("What is this?"),
-            _c("span", { staticClass: "pull-right" }, [
-              _c("i", { staticClass: "fa fa-chevron-down" })
-            ])
-          ]
-        ),
-        _c("div", { staticClass: "collapse", attrs: { id: "info" } }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("p", { staticClass: "mb-0" }, [
-              _vm._v(
-                "This tool is a worksheet to help determine the amount of runes needed for Reanimating Ensouled Heads and how much experience will be accrued. "
-              )
-            ])
+    return _c("div", { staticClass: "card mb-1" }, [
+      _c(
+        "div",
+        {
+          staticClass: "card-header clickable",
+          attrs: { "data-toggle": "collapse", "data-target": "#info" }
+        },
+        [
+          _vm._v("What is this?"),
+          _c("span", { staticClass: "pull-right" }, [
+            _c("i", { staticClass: "fa fa-chevron-down" })
+          ])
+        ]
+      ),
+      _c("div", { staticClass: "collapse", attrs: { id: "info" } }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("p", { staticClass: "mb-0" }, [
+            _vm._v(
+              "This tool is a worksheet to help determine the amount of runes needed for Reanimating Ensouled Heads and how much experience will be accrued. "
+            )
           ])
         ])
-      ]),
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _vm._v("Ensouled Head Worksheet")
-        ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("img", {
+        staticClass: "mr-1",
+        attrs: { src: "/api/images/pray.png" }
+      }),
+      _c("span", { staticClass: "mr-1" }, [_vm._v("Ensouled Head Worksheet")])
     ])
   }
 ]

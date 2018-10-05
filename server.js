@@ -33,6 +33,11 @@ app.get('/api/slayer_masters', (req, res) => {
     res.send(JSON.stringify(require('./app/SlayerMasters.js')))
 })
 
+app.get('/api/ensouled_heads', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+    res.send(JSON.stringify(require('./app/EnsouledHeads.js')))
+})
+
 /**
  * STATIC ROUTES
  */
